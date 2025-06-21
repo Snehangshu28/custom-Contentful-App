@@ -1,0 +1,40 @@
+.controls {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.controls button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.controls button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.droppable-area {
+    padding: 1rem;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    min-height: 200px;
+    background-color: #f9f9f9;
+}
+
+.draggable-item {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 1rem 0;
+} 

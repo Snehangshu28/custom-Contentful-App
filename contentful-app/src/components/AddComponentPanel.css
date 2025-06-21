@@ -1,0 +1,19 @@
+.add-component-panel {
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.add-component-panel h3 {
+    margin-top: 0;
+}
+
+.add-component-panel button {
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #e0e0e0;
+} 

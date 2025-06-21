@@ -1,0 +1,41 @@
+.twoColumnRow {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  align-items: center;
+}
+
+.left, .right {
+  flex: 1;
+}
+
+.left {
+  padding-right: 2rem;
+}
+
+.left h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.left p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.left button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+} 
