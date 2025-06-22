@@ -59,8 +59,8 @@ Visit [http://localhost:3000/landing/page-1](http://localhost:3000/landing/page-
 Create a `.env.local` file in `next-frontend/` with:
 
 ```
-CONTENTFUL_SPACE_ID=your_space_id
-CONTENTFUL_ACCESS_TOKEN=your_access_token
+CONTENTFUL_SPACE_ID=4rjdmz4xjxli
+CONTENTFUL_ACCESS_TOKEN=r5TVf5-GJ8cH_gnE4w3OoyRPudEi1fN3eW0PHa-C_4I
 ```
 
 ---
