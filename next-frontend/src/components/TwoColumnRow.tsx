@@ -15,19 +15,24 @@ type TwoColumnRowProps = {
 const TwoColumnRow: React.FC<{ component: TwoColumnRowProps }> = ({ component }) => {
   return (
     <div className={styles.twoColumnRow}>
-      <div className={styles.left}>
-        <h2>{component.leftHeading}</h2>
-        <p>{component.leftSubtitle}</p>
-        <button>{component.leftCta}</button>
+      <div className={styles.leftColumn}>
+        <h2>{component.leftHeading || 'Section Title'}</h2>
+        <p>{component.leftSubtitle || 'Section description goes here'}</p>
+        {component.leftCta && (
+          <button className={styles.ctaButton}>{component.leftCta}</button>
+        )}
       </div>
-      <div className={styles.right}>
-        <Image
-          src={component.rightImage.url}
-          alt={component.leftHeading}
-          width={component.rightImage.width}
-          height={component.rightImage.height}
-          className={styles.image}
-        />
+      <div className={styles.rightColumn}>
+        {component.rightImage && (
+          <Image
+            src={component.rightImage.url}
+            alt={component.leftHeading || 'Section image'}
+            width={component.rightImage.width || 600}
+            height={component.rightImage.height || 400}
+            style={{ objectFit: 'cover' }}
+            quality={85}
+          />
+        )}
       </div>
     </div>
   );

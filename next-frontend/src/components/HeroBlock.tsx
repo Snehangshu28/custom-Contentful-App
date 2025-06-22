@@ -15,17 +15,22 @@ type HeroBlockProps = {
 const HeroBlock: React.FC<{ component: HeroBlockProps }> = ({ component }) => {
   return (
     <div className={styles.hero}>
-      <Image
-        src={component.backgroundImage.url}
-        alt={component.heading}
-        layout="fill"
-        objectFit="cover"
-        quality={85}
-      />
+      {component.backgroundImage && (
+        <Image
+          src={component.backgroundImage.url}
+          alt={component.heading || 'Hero background'}
+          fill
+          style={{ objectFit: 'cover' }}
+          quality={85}
+          priority
+        />
+      )}
       <div className={styles.content}>
-        <h1>{component.heading}</h1>
-        <p>{component.subtitle}</p>
-        <button>{component.cta}</button>
+        <h1>{component.heading || 'Welcome'}</h1>
+        <p>{component.subtitle || 'Discover amazing content'}</p>
+        {component.cta && (
+          <button className={styles.ctaButton}>{component.cta}</button>
+        )}
       </div>
     </div>
   );

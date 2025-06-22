@@ -1,36 +1,58 @@
 import Image from 'next/image';
 import styles from './ImageGrid.module.css';
 
-type Image = {
-  url: string;
-  width: number;
-  height: number;
-};
-
 type ImageGridProps = {
-  image1: Image;
-  image2: Image;
-  image3: Image;
-  image4: Image;
+  image1: {
+    url: string;
+    width: number;
+    height: number;
+  };
+  image2: {
+    url: string;
+    width: number;
+    height: number;
+  };
+  image3: {
+    url: string;
+    width: number;
+    height: number;
+  };
+  image4: {
+    url: string;
+    width: number;
+    height: number;
+  };
 };
 
 const ImageGrid: React.FC<{ component: ImageGridProps }> = ({ component }) => {
-  const images = [component.image1, component.image2, component.image3, component.image4];
-  
+  const images = [
+    { ...component.image1, id: 1 },
+    { ...component.image2, id: 2 },
+    { ...component.image3, id: 3 },
+    { ...component.image4, id: 4 },
+  ].filter(img => img.url); // Only show images that have URLs
+
+  if (images.length === 0) {
+    return (
+      <div className={styles.imageGrid}>
+        <p>No images configured for this grid.</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.imageGrid}>
-      {images.map((image, index) => (
-        image && (
-          <div key={index} className={styles.gridItem}>
-            <Image
-              src={image.url}
-              alt={`Grid image ${index + 1}`}
-              width={image.width}
-              height={image.height}
-              className={styles.image}
-            />
-          </div>
-        )
+      {images.map((image) => (
+        <div key={image.id} className={styles.imageContainer}>
+          <Image
+            src={image.url}
+            alt={`Grid image ${image.id}`}
+            width={image.width || 300}
+            height={image.height || 300}
+            style={{ objectFit: 'cover' }}
+            quality={85}
+          />
+        </div>
       ))}
     </div>
   );
