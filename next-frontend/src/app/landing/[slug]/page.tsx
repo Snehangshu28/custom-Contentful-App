@@ -129,10 +129,11 @@ type LandingPageData = {
 };
 
 type PageComponentData = {
-    heroBlockCollection: { items: any[] };
-    twoColumnRowCollection: { items: any[] };
-    imageGridCollection: { items: any[] };
+  heroBlockCollection: { items: Record<string, unknown>[] };
+  twoColumnRowCollection: { items: Record<string, unknown>[] };
+  imageGridCollection: { items: Record<string, unknown>[] };
 }
+
 
 const componentMap = {
   heroBlock: HeroBlock,
@@ -154,7 +155,6 @@ async function getLandingPage(slug: string) {
       return null;
     }
 
-    // Add null check for layoutConfig
     const layoutConfig = page.layoutConfig || [];
     console.log('Layout config:', layoutConfig);
     
@@ -178,9 +178,10 @@ async function getLandingPage(slug: string) {
         ...componentsData.imageGridCollection.items,
     ];
 
-    // Map content to the layout order
     const hydratedComponents = layoutConfig.map(config => {
-        const content = allComponents.find(c => c.sys.id === config.contentId);
+        const content = allComponents.find((c: Record<string, unknown>) => 
+          (c.sys as Record<string, unknown>)?.id === config.contentId
+        );
         console.log(`Component ${config.type} with ID ${config.contentId}:`, content);
         return {
             ...config,
@@ -251,7 +252,6 @@ export default async function LandingPage({ params }: PageProps) {
 
     return (
       <main className="min-h-screen">
-        {/* <h1 className="text-3xl font-bold text-center py-8">{page.title}</h1> */}
         {page.components.length === 0 ? (
           <div className="text-center py-8">
             <p>No components configured for this page.</p>
