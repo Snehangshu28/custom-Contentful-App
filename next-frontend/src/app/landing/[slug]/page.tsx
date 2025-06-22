@@ -5,9 +5,6 @@ import TwoColumnRow from '@/components/TwoColumnRow';
 import ImageGrid from '@/components/ImageGrid';
 import { Metadata } from 'next';
 
-// TODO: Create Component-to-Renderer mapping
-// TODO: Implement generateMetadata
-
 const LANDING_PAGE_SLUGS_QUERY = `
   query LandingPageSlugs {
     landingPageCollection {
@@ -117,8 +114,6 @@ const PAGE_COMPONENTS_QUERY = `
   }
 `;
 
-// Define types for the responses
-// (These should be more specific based on your actual data)
 type LandingPageData = {
   landingPageCollection: {
     items: {
@@ -134,14 +129,12 @@ type PageComponentData = {
   imageGridCollection: { items: Record<string, unknown>[] };
 }
 
-
 const componentMap = {
   heroBlock: HeroBlock,
   twoColumnRow: TwoColumnRow,
   imageGrid: ImageGrid,
 };
 
-// Fetch data for a specific landing page
 async function getLandingPage(slug: string) {
   try {
     console.log('Fetching page for slug:', slug);
@@ -223,7 +216,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       '@context': 'https://schema.org',
       '@type': 'WebPage',
       name: page.title,
-      url: `https://your-domain.com/landing/${params.slug}`,
+      url: `https://your-domain.com/landing/${slug}`,
       description: `Learn more about ${page.title} on our amazing landing page.`,
     };
 
@@ -243,7 +236,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function LandingPage({ params }: PageProps) {
   try {
-    const { slug } = await params; 
+    const { slug } = await params;
     const page = await getLandingPage(slug);
 
     if (!page) {
@@ -270,7 +263,7 @@ export default async function LandingPage({ params }: PageProps) {
                 </div>
               );
             }
-            return <Component key={component.id} component={component.content} />;
+            return <Component key={component.id} component={component.content as any} />;
           })
         )}
       </main>
@@ -286,4 +279,4 @@ export default async function LandingPage({ params }: PageProps) {
       </main>
     );
   }
-} 
+}
