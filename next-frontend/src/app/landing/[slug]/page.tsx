@@ -41,9 +41,9 @@ export async function generateStaticParams() {
 }
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 const LANDING_PAGE_QUERY = `
@@ -201,7 +201,8 @@ async function getLandingPage(slug: string) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   try {
-    const page = await getLandingPage(params.slug);
+    const { slug } = await params;
+    const page = await getLandingPage(slug);
 
     if (!page) {
       return {
@@ -242,7 +243,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function LandingPage({ params }: PageProps) {
   try {
-    const page = await getLandingPage(params.slug);
+    const { slug } = await params; 
+    const page = await getLandingPage(slug);
 
     if (!page) {
       notFound();
